@@ -40,8 +40,4 @@
    - Calendar view for daily notes
    - Protected Routes
 
-📦 Note:
-   - `node_modules` are not included.
-   - Run `npm install` in both folders after extracting.
-
 ✨ Thank you!
