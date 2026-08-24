@@ -15,7 +15,7 @@ function Signup() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post("http://localhost:5000/api/auth/register", form);
+      const res = await axios.post("https://journly.onrender.com/api/auth/register", form);
 
       // 🔐 Save token to localStorage
       localStorage.setItem("token", res.data.token);
