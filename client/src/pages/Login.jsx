@@ -1,27 +1,48 @@
 import React, { useState } from "react";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import "./Login.css";
 
 function Login() {
-  const [form, setForm] = useState({ email: "", password: "" });
+  const [form, setForm] = useState({
+    email: "",
+    password: "",
+  });
+
   const navigate = useNavigate();
 
   const handleChange = (e) => {
-    setForm({ ...form, [e.target.name]: e.target.value });
+    setForm({
+      ...form,
+      [e.target.name]: e.target.value,
+    });
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
     try {
-      const res = await axios.post("https://journly.onrender.com/api/auth/login", form);
+      const res = await axios.post(
+        "https://journly.onrender.com/api/auth/login",
+        form
+      );
+
       localStorage.setItem("token", res.data.token);
+
       console.log("✅ Token Saved:", res.data.token);
+
       alert("Login successful!");
-      navigate("/diary"); // 👈 redirect to diary page
+
+      navigate("/diary");
     } catch (err) {
-      console.error("❌ Login Error:", err.response?.data || err.message);
-      alert(err.response?.data?.message || "Login failed");
+      console.error(
+        "❌ Login Error:",
+        err.response?.data || err.message
+      );
+
+      alert(
+        err.response?.data?.message || "Login failed"
+      );
     }
   };
 
@@ -29,7 +50,10 @@ function Login() {
     <div className="login-container">
       <div className="login-box">
         <h2>Login</h2>
-        <p>Welcome back! Please login to access your diary.</p>
+
+        <p>
+          Welcome back! Please login to access your diary.
+        </p>
 
         <form onSubmit={handleSubmit}>
           <input
@@ -40,6 +64,7 @@ function Login() {
             onChange={handleChange}
             required
           />
+
           <input
             type="password"
             name="password"
@@ -49,11 +74,19 @@ function Login() {
             required
           />
 
-          <button className="login-button" type="submit">Login</button>
+          <button
+            className="login-button"
+            type="submit"
+          >
+            Login
+          </button>
         </form>
 
         <p className="signup-link">
-          New user? <a href="/signup">Sign up</a>
+          New user?{" "}
+          <Link to="/signup">
+            Sign up
+          </Link>
         </p>
       </div>
     </div>
